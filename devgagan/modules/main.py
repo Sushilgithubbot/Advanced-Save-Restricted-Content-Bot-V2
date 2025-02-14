@@ -62,7 +62,7 @@ async def check_interval(user_id, freecheck):
 
     return True, None
 
-async def set_interval(user_id, interval_minutes=35):
+async def set_interval(user_id, interval_minutes=45):
     now = datetime.now()
     # Set the cooldown interval for the user
     interval_set[user_id] = now + timedelta(seconds=interval_minutes)
@@ -173,7 +173,7 @@ async def batch_link(_, message):
         return
     user_id = message.chat.id
     # Check if a batch process is already running
-    if users_loop.get(user_id, True):
+    if users_loop.get(user_id, False):
         await app.send_message(
             message.chat.id,
             "You already have a batch process running. Please wait for it to complete."
