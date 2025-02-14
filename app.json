@@ -44,7 +44,7 @@
     "STRING": {
       "description": "Enter premium account session string if you want to allow the paid users to upload upto 4GB",
       "value": "",
-      "required": true
+      "required": false
     },
 
     "DEFAULT_SESSION": {
