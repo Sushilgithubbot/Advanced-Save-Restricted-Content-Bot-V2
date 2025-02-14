@@ -38,13 +38,13 @@
     },
     "PREMIUM_LIMIT": {
       "description": "Batch size for premium users",
-      "value": "500",
+      "value": "10000",
       "required": true
     },
     "STRING": {
       "description": "Enter premium account session string if you want to allow the paid users to upload upto 4GB",
       "value": "",
-      "required": false
+      "required": true
     },
     "WEBSITE_URL": {
       "description": "Enter shortener website domain eg upshrink.com",
