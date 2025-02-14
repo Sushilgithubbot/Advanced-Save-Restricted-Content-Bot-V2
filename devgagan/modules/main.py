@@ -40,7 +40,7 @@ batch_mode = {}
 async def process_and_upload_link(userbot, user_id, msg_id, link, retry_count, message):
     try:
         await get_msg(userbot, user_id, msg_id, link, retry_count, message)
-        await asyncio.sleep(15)
+        await asyncio.sleep(5)
     finally:
         pass
 
