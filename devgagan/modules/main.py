@@ -62,7 +62,7 @@ async def check_interval(user_id, freecheck):
 
     return True, None
 
-async def set_interval(user_id, interval_minutes=45):
+async def set_interval(user_id, interval_minutes=35):
     now = datetime.now()
     # Set the cooldown interval for the user
     interval_set[user_id] = now + timedelta(seconds=interval_minutes)
@@ -171,7 +171,7 @@ async def batch_link(_, message):
         return
     user_id = message.chat.id
     # Check if a batch process is already running
-    if users_loop.get(user_id, False):
+    if users_loop.get(user_id, True):
         await app.send_message(
             message.chat.id,
             "You already have a batch process running. Please wait for it to complete."
@@ -186,7 +186,7 @@ async def batch_link(_, message):
     max_batch_size = FREEMIUM_LIMIT if freecheck == 1 else PREMIUM_LIMIT
 
     # Start link input
-    for attempt in range(3):
+    for attempt in range(8):
         start = await app.ask(message.chat.id, "Please send the start link.\n\n> Maximum tries 3")
         start_id = start.text.strip()
         s = start_id.split("/")[-1]
@@ -199,7 +199,7 @@ async def batch_link(_, message):
         return
 
     # Number of messages input
-    for attempt in range(3):
+    for attempt in range(8):
         num_messages = await app.ask(message.chat.id, f"How many messages do you want to process?\n> Max limit {max_batch_size}")
         try:
             cl = int(num_messages.text.strip())
@@ -249,7 +249,7 @@ async def batch_link(_, message):
                     )
                     normal_links_handled = True
         if normal_links_handled:
-            await set_interval(user_id, interval_minutes=300)
+            await set_interval(user_id, interval_minutes=60)
             await pin_msg.edit_text(
                 f"Batch completed successfully for {cl} messages 🎉\n\n**__Powered by Team SPY__**",
                 reply_markup=keyboard
@@ -274,7 +274,7 @@ async def batch_link(_, message):
                         reply_markup=keyboard
                     )
 
-        await set_interval(user_id, interval_minutes=300)
+        await set_interval(user_id, interval_minutes=60)
         await pin_msg.edit_text(
             f"Batch completed successfully for {cl} messages 🎉\n\n**__Powered by Team SPY__**",
             reply_markup=keyboard
