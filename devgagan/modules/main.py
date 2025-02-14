@@ -173,7 +173,7 @@ async def batch_link(_, message):
         return
     user_id = message.chat.id
     # Check if a batch process is already running
-    if users_loop.get(user_id, False):
+    if users_loop.get(user_id, false):
         await app.send_message(
             message.chat.id,
             "You already have a batch process running. Please wait for it to complete."
