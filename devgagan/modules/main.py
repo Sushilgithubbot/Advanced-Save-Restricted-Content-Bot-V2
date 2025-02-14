@@ -132,7 +132,7 @@ async def initialize_userbot(user_id): # this ensure the single startup .. even 
     data = await db.get_data(user_id)
     if data and data.get("session"):
         try:
-            device = 'iPhone 16 Pro' # added gareebi text
+            device = 'iPhone  Sushil Pro' # added gareebi text
             userbot = Client(
                 "userbot",
                 api_id=API_ID,
